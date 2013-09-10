@@ -6,19 +6,9 @@
 //  Copyright (c) 2013 Lucian Boboc. All rights reserved.
 //
 
-#if ! __has_feature(objc_arc)
-#error LBFacebook is ARC only.
-#endif
-
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_6_0
-#error LBFacebook needs iOS 6.0 or later.
-#endif
-
-
-
 #import <Foundation/Foundation.h>
 
-#define kFacebookKey @"434676999905114"
+#define kFacebookKey @"1396364633913432"
 
 typedef NS_ENUM(NSUInteger, LBFacebookButtonsAction){
     LBFacebookButtonsActionEnable,

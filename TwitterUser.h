@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MBProgressHUD.h"
 
-@interface TwitterUser : UIViewController
+@interface TwitterUser : UIViewController<UIWebViewDelegate>
+
+@property(nonatomic,retain) IBOutlet UIWebView *twitterView;
 
 @end

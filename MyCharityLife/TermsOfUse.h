@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface TermsOfUse : UIViewController
+@property(nonatomic,retain) IBOutlet UIWebView *agreeTerms;
 
 @end

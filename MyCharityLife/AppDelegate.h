@@ -7,9 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <FacebookSDK/FacebookSDK.h>
+
+extern NSString *const SCSessionStateChangedNotification;
+
+@class LoginUser;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
+@property (strong, nonatomic) FBSession *session;
+@property (strong, nonatomic) LoginUser *viewController;
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) UINavigationController *navController;
 
 @end

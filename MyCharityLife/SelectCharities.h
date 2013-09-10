@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GradientButton.h"
 
 @interface SelectCharities : UIViewController
+
+@property(nonatomic,retain) IBOutlet GradientButton *nextBtn;
 
 @end

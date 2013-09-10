@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
+#import <CoreLocation/CoreLocation.h>
+#import "GradientButton.h"
 
-@interface MCLMain : UIViewController
+@interface MCLMain : UIViewController<CLLocationManagerDelegate>
+@property(nonatomic,retain) IBOutlet GradientButton *signUpBtn;
+@property(nonatomic,retain) IBOutlet GradientButton *logInBtn;
+@property(nonatomic,retain) CLLocationManager *locationManager;
+@property(nonatomic) CLLocationCoordinate2D userCoordinate;
 
 @end

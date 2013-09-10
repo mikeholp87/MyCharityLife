@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ASIFormDataRequest.h"
+#import "SBJson.h"
+#import "Donate.h"
 
 @interface CharityDesc : UIViewController
+@property(nonatomic,retain) NSString *charity_id;
+@property(nonatomic,retain) NSMutableDictionary *description;
+@property(nonatomic,retain) IBOutlet UITextView *descView;
+@property(nonatomic,retain) IBOutlet UITextView *titleView;
 
 @end

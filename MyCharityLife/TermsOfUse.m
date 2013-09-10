@@ -8,11 +8,8 @@
 
 #import "TermsOfUse.h"
 
-@interface TermsOfUse ()
-
-@end
-
 @implementation TermsOfUse
+@synthesize agreeTerms;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -26,13 +23,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+	
+    NSURLRequest *requestObj = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.mycharitylife.com/privacy-policy.php"]];
+    [agreeTerms loadRequest:requestObj];
 }
 
 @end

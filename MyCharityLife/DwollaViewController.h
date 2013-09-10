@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DwollaAPI.h"
 
 @interface DwollaViewController : UIViewController
+
+@property(nonatomic, retain) DwollaAPI *dwollaAPI;
 
 @end

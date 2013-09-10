@@ -115,7 +115,7 @@
                         NSString *errorString = error.localizedDescription;
                         if(error.code > 1 && error.code <= 8)
                             errorString = [self configureErrorStringForCode: error.code];
-                            
+                        
                         
                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Facebook" message: errorString delegate: nil cancelButtonTitle: @"OK" otherButtonTitles:nil];
                         [alert show];
@@ -131,7 +131,7 @@
                         
                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Facebook" message: kFacebookAccessNOTGranted delegate:nil cancelButtonTitle: @"OK" otherButtonTitles:nil];
                         [alert show];
-
+                        
                         if(self.completionBlock)
                             self.completionBlock(nil,LBFacebookButtonsActionEnable);
                     });
@@ -194,7 +194,7 @@
                                     dispatch_async(dispatch_get_main_queue(), ^{
                                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Facebook" message: error.localizedDescription delegate: nil cancelButtonTitle: @"OK" otherButtonTitles: nil];
                                         [alert show];
-
+                                        
                                         if(self.completionBlock)
                                             self.completionBlock(nil,LBFacebookButtonsActionEnable);
                                     });
@@ -210,7 +210,7 @@
                                 errorMsg = kFacebookGetProfileError;
                             UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Facebook" message: errorMsg delegate: nil cancelButtonTitle: @"OK" otherButtonTitles: nil];
                             [alert show];
-
+                            
                             if(self.completionBlock)
                                 self.completionBlock(nil,LBFacebookButtonsActionEnable);
                         }

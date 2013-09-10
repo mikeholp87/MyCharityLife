@@ -8,10 +8,6 @@
 
 #import "SignUp.h"
 
-@interface SignUp ()
-
-@end
-
 @implementation SignUp
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -26,13 +22,41 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    self.navigationController.navigationBarHidden = YES;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    self.navigationController.navigationBarHidden = NO;
+}
+
+- (IBAction)signupFacebook:(id)sender
+{
+    UITabBarController *mainTab = [self.storyboard instantiateViewControllerWithIdentifier:@"MainTabController"];
+    [self presentViewController:mainTab animated:YES completion:nil];
+}
+
+- (IBAction)signupTwitter:(id)sender
+{
+    Email *emailView = [self.storyboard instantiateViewControllerWithIdentifier:@"Email"];
+    emailView.title = @"Twitter Signup";
+    [self.navigationController pushViewController:emailView animated:YES];
+}
+
+- (IBAction)signupEmail:(id)sender
+{
+    Email *emailView = [self.storyboard instantiateViewControllerWithIdentifier:@"Email"];
+    emailView.title = @"Email Signup";
+    [self.navigationController pushViewController:emailView animated:YES];
+}
+
+- (IBAction)goBack:(id)sender
+{
+    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:3] animated:YES];
 }
 
 @end

@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 Flash Corp. All rights reserved.
 //
 
-#import "LocationCell.h"
+#import "CharityCell.h"
 
-@implementation LocationCell
-@synthesize locationLbl, noteLbl, dateLbl, photo;
+@implementation CharityCell
+@synthesize charityLbl, followBtn;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

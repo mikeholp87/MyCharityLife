@@ -8,11 +8,8 @@
 
 #import "NewsDetail.h"
 
-@interface NewsDetail ()
-
-@end
-
 @implementation NewsDetail
+@synthesize webView, tweetURL;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -26,13 +23,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+	
+    NSURLRequest *requestObj = [NSURLRequest requestWithURL:tweetURL];
+    [webView loadRequest:requestObj];
 }
 
 @end

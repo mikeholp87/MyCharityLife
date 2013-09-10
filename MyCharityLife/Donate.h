@@ -9,28 +9,24 @@
 #import <UIKit/UIKit.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <QuartzCore/QuartzCore.h>
-#import <MediaPlayer/MediaPlayer.h>
+#import <Social/Social.h>
+#import <FacebookSDK/FacebookSDK.h>
+#import "DwollaOAuth2Client.h"
+#import "IDwollaMessages.h"
+#import "DwollaViewController.h"
 #import "ASIFormDataRequest.h"
-#import "PayPalMobile.h"
-#import "STPView.h"
-#import "STPCard.h"
 #import "MBProgressHUD.h"
-#import "defs.h"
 
-@interface Donate : UIViewController<UIWebViewDelegate, PayPalPaymentDelegate, STPViewDelegate>
+@interface Donate : UIViewController<UIWebViewDelegate, UITableViewDataSource, UITableViewDelegate, FBLoginViewDelegate, IDwollaMessages>
 
-@property(nonatomic,retain) IBOutlet UINavigationBar *stripeBar;
-@property(nonatomic,retain) IBOutlet UIBarButtonItem *saveBtn;
-@property(nonatomic,retain) IBOutlet UIBarButtonItem *cancelBtn;
-@property(nonatomic, strong, readwrite) IBOutlet UIButton *payButton;
-@property(nonatomic, strong, readwrite) IBOutlet UIView *successView;
-@property(nonatomic, strong, readwrite) IBOutlet UIButton *learnBtn;
+@property(nonatomic, retain) IBOutlet UITableView *amountsTable;
+@property(strong, nonatomic) IBOutlet UIButton *buttonPostStatus;
+@property(strong, nonatomic) id<FBGraphUser> loggedInUser;
 
-@property(nonatomic, strong, readwrite) NSString *environment;
-@property(nonatomic, assign, readwrite) BOOL acceptCreditCards;
-@property(nonatomic, strong, readwrite) PayPalPayment *completedPayment;
-@property(nonatomic, strong, readwrite) STPView *checkoutView;
-@property(nonatomic, retain) UIImageView *dimLayer;
-@property (strong, nonatomic) MPMoviePlayerController *moviePlayer;
+@property(nonatomic, retain) NSUserDefaults *settings;
+
+@property(nonatomic, retain) NSArray *amounts;
+
+@property(nonatomic, retain) DwollaAPI *dwollaAPI;
 
 @end

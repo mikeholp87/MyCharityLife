@@ -8,10 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LocationCell : UITableViewCell
-@property (nonatomic, retain) IBOutlet UILabel *locationLbl;
-@property (nonatomic, retain) IBOutlet UILabel *noteLbl;
-@property (nonatomic, retain) IBOutlet UILabel *dateLbl;
-@property (nonatomic, retain) IBOutlet UIButton *photo;
+@interface CharityCell : UITableViewCell
+@property (nonatomic, retain) IBOutlet UILabel *charityLbl;
+@property (nonatomic, retain) IBOutlet UIButton *followBtn;
 
 @end

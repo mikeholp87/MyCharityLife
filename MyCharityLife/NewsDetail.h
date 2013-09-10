@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NewsDetail : UIViewController
+@interface NewsDetail : UIViewController<UIWebViewDelegate>
+
+@property(nonatomic,retain) IBOutlet UIWebView *webView;
+@property(nonatomic,retain) NSURL *tweetURL;
 
 @end
