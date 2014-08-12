@@ -7,8 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <FacebookSDK/FacebookSDK.h>
+#import <Twitter/Twitter.h>
+#import <Accounts/Accounts.h>
+#import "MBProgressHUD.h"
+#import "STTwitterAPIWrapper.h"
 #import "Email.h"
 
-@interface SignUp : UIViewController
+@interface SignUp : UIViewController<FBLoginViewDelegate>
+
+@property(nonatomic,retain) IBOutlet UIButton *facebookBtn;
+@property(nonatomic,retain) IBOutlet UIButton *twitterBtn;
+@property(nonatomic,retain) IBOutlet UIButton *emailBtn;
+
+@property(nonatomic,retain) NSUserDefaults *settings;
+@property(nonatomic,retain) NSMutableDictionary *twitterInfo;
+@property(nonatomic,retain) NSMutableDictionary *facebookInfo;
+
+@property(nonatomic,retain) IBOutlet FBLoginView *loginView;
 
 @end

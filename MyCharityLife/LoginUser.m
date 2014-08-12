@@ -9,7 +9,7 @@
 #import "LoginUser.h"
 
 @implementation LoginUser
-@synthesize facebook, connectButton, facebookBtn, twitterBtn, emailBtn, twitterInfo, facebookInfo, settings;
+@synthesize facebookBtn, twitterBtn, emailBtn, twitterInfo, facebookInfo, settings;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -131,8 +131,11 @@
                         [twitterInfoRequest setAccount:twitterAccount];
                         
                         // Making the request
-                        [twitterInfoRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-                            dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        dispatch_queue_t downloadQueue = dispatch_queue_create("twitter", NULL);
+                        
+                        dispatch_async(downloadQueue, ^{
+                            [twitterInfoRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
                                 if ([urlResponse statusCode] == 429) {
                                     return;
                                 }
@@ -168,24 +171,23 @@
                                     NSMutableDictionary *dict = [settings objectForKey:@"twitter_info"];
                                     //NSLog(@"++++ %@", dict);
                                 }
+                            }];
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                
+                                [settings setBool:FALSE forKey:@"login_email"];
+                                [settings setBool:FALSE forKey:@"login_facebook"];
+                                [settings setBool:TRUE forKey:@"login_twitter"];
+                                [settings synchronize];
+                                
+                                [self showFeed];
                             });
-                        }];
+                        });
                     }
                 } else {
                     NSLog(@"Access denied");
                 }
             }];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
-                
-                [settings setBool:FALSE forKey:@"login_email"];
-                [settings setBool:FALSE forKey:@"login_facebook"];
-                [settings setBool:TRUE forKey:@"login_twitter"];
-                [settings synchronize];
-                
-                [self performSelectorOnMainThread:@selector(showFeed) withObject:nil waitUntilDone:YES];
-            });
         });
     }else{
         ACAccountStore *store = [[ACAccountStore alloc] init]; // Long-lived
@@ -241,17 +243,6 @@
         }];
     }
 }
-
-- (void)enableButtons
-{
-    self.connectButton.enabled = YES;
-}
-
-- (void)disableButtons
-{
-    self.connectButton.enabled = NO;
-}
-
 
 - (IBAction)loginFacebook:(id)sender
 {

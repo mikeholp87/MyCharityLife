@@ -31,8 +31,8 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 {
     [super viewDidLoad];
     
-    UIView *logoView = [[UIView alloc] initWithFrame:CGRectMake(75, 0, 180, 22)];
-    UIButton *logo = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 180, 22)];
+    UIView *logoView = [[UIView alloc] initWithFrame:CGRectMake(75, 0, 160, 20)];
+    UIButton *logo = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 160, 20)];
     [logo setImage:[UIImage imageNamed:@"mcl_logo.png"] forState:UIControlStateNormal];
     [logo addTarget:self action:@selector(backToStart) forControlEvents:UIControlEventTouchUpInside];
     
@@ -51,6 +51,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     else
         emailInfo = [settings objectForKey:@"email_info"];
     
+    NSLog(@"%@", facebookInfo);
     NSLog(@"%@", twitterInfo);
     
     UIBarButtonItem *logout = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStyleDone target:self action:@selector(logout)];
@@ -106,7 +107,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
             nameField.keyboardType = UIKeyboardTypeDefault;
             nameField.font = [UIFont systemFontOfSize:16];
             nameField.returnKeyType = UIReturnKeyDone;
-            nameField.backgroundColor = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1.0];
+            nameField.backgroundColor = [UIColor whiteColor];
             nameField.textAlignment = UITextAlignmentLeft;
             nameField.tag = 0;
             nameField.delegate = self;
@@ -132,7 +133,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
             emailField.keyboardType = UIKeyboardTypeEmailAddress;
             emailField.font = [UIFont systemFontOfSize:16];
             emailField.returnKeyType = UIReturnKeyDone;
-            emailField.backgroundColor = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1.0];
+            emailField.backgroundColor = [UIColor whiteColor];
             emailField.textAlignment = UITextAlignmentLeft;
             emailField.tag = 1;
             emailField.delegate = self;
@@ -159,7 +160,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
             passwdField.font = [UIFont systemFontOfSize:16];
             passwdField.secureTextEntry = TRUE;
             passwdField.returnKeyType = UIReturnKeyDone;
-            passwdField.backgroundColor = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1.0];
+            passwdField.backgroundColor = [UIColor whiteColor];
             passwdField.textAlignment = UITextAlignmentLeft;
             passwdField.tag = 2;
             passwdField.delegate = self;
@@ -188,6 +189,9 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         else
             cell.textLabel.text = @"Terms and Service";
     }
+    
+    else if(indexPath.section == 3)
+        cell.textLabel.text = @"Logout";
     
     return cell;
 }
@@ -226,6 +230,8 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
             [self.navigationController pushViewController:terms animated:YES];
         }
     }
+    else if(indexPath.section == 3)
+        [self logout];
 }
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error;
@@ -242,7 +248,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 - (UIToolbar *)keyboardToolBar {
     
     UIToolbar *toolbar = [[UIToolbar alloc] init];
-    [toolbar setBarStyle:UIBarStyleBlackTranslucent];
+    [toolbar setBarStyle:UIBarStyleDefault];
     [toolbar sizeToFit];
     
     segControl = [[UISegmentedControl alloc] initWithItems:@[@"Previous", @"Next"]];
@@ -381,7 +387,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 -(void)image:(UIImage *)image finishedSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
     if (error) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Save failed" message: @"Failed to save image" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Save failed" message:@"Failed to save image" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     }
 }
@@ -428,6 +434,20 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     [nameField resignFirstResponder];
     [passwdField resignFirstResponder];
     [emailField resignFirstResponder];
+    /*
+    if([settings boolForKey:@"login_twitter"]){
+        [[settings objectForKey:@"twitter_info"] setObject:nameField.text forKey:@"name"];
+        [[settings objectForKey:@"twitter_info"] setObject:emailField.text forKey:@"email"];
+        [settings synchronize];
+    }else if([settings boolForKey:@"login_facebook"]){
+        [settings setObject:nameField.text forKey:[[settings objectForKey:@"fb_user"] objectForKey:@"name"]];
+        [settings setObject:emailField.text forKey:[[settings objectForKey:@"fb_user"] objectForKey:@"email"]];
+        [settings synchronize];
+    }else{
+        [emailInfo setObject:nameField.text forKey:@"name"];
+        [emailInfo setObject:emailField.text forKey:@"email"];
+    }
+    */
 }
 
 - (void)logout
